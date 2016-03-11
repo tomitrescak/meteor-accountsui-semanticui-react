@@ -1,0 +1,75 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": true,
+    "removeComments": false,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "outDir": "../dist",
+    "suppressImplicitAnyIndexErrors": true,
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
+    "watch": true
+  },
+  "formatCodeOptions": {
+    "indentSize": 2,
+    "tabSize": 2,
+    "convertTabsToSpaces": true,
+    "insertSpaceAfterCommaDelimiter": true,
+    "insertSpaceAfterSemicolonInForStatements": true,
+    "insertSpaceBeforeAndAfterBinaryOperators": true,
+    "insertSpaceAfterKeywordsInControlFlowStatements": true,
+    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+    "placeOpenBraceOnNewLineForFunctions": false,
+    "placeOpenBraceOnNewLineForControlBlocks": false
+  },
+  "filesGlob": [
+    "!node_modules",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  },
+  "files": [
+    "client/actions/accounts.ts",
+    "client/actions/index.ts",
+    "client/configs/accounts_config.ts",
+    "client/configs/context.ts",
+    "client/configs/i18n.ts",
+    "client/configs/method_stubs/accounts.ts",
+    "client/containers/accounts_container.ts",
+    "client/index.ts",
+    "client/main.ts",
+    "server/methods/accounts.ts",
+    "server/methods/index.ts",
+    "typings/jquery/jquery.d.ts",
+    "typings/meteor/meteor.d.ts",
+    "typings/packages/flow_router.d.ts",
+    "typings/packages/i18n-client.d.ts",
+    "typings/packages/jsx_controls.d.ts",
+    "typings/packages/mantra.d.ts",
+    "typings/packages/meteor-extras.d.ts",
+    "typings/packages/roles.d.ts",
+    "typings/packages/semantic_ui.d.ts",
+    "typings/packages/subs_manager.d.ts",
+    "typings/react/react-dom.d.ts",
+    "typings/react/react.d.ts",
+    "client/components/accounts_root_view.tsx",
+    "client/components/forgot_password_view.tsx",
+    "client/components/logged_user_view.tsx",
+    "client/components/resend_verification_view.tsx",
+    "client/components/reset_password_view.tsx",
+    "client/components/sign_in_view.tsx",
+    "client/components/sign_up_view.tsx"
+  ]
+}
