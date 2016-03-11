@@ -26,7 +26,7 @@ export default class ResendVerification extends Component<IComponent, {}> {
     const mf = this.props.context.i18n.initTranslator("accounts");
 
     return (
-      <div id="resendVerificationForm" className="ui black login form">
+      <div id="resendVerificationForm" className="ui login form">
         <div className="field">
           <label>{ mf("email") }</label>
           <div className="ui icon input">

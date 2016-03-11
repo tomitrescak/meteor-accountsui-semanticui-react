@@ -35,7 +35,7 @@ export default class SignUp extends Component<IComponent, {}> {
     const mf = this.props.context.i18n.initTranslator("accounts");
 
     return (
-      <div className="ui form login black" id="signUpForm">
+      <div className="ui form login" id="signUpForm">
         <div className="ui error message" />
         <div className="field">
           <label>{ mf("fullName") }</label>

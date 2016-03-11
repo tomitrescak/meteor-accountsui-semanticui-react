@@ -23,7 +23,7 @@ var ForgotPassword = (function (_super) {
     };
     ForgotPassword.prototype.render = function () {
         var mf = this.props.context.i18n.initTranslator("accounts");
-        return (React.createElement("div", {id: "forgotPasswordForm", className: "ui black login form"}, 
+        return (React.createElement("div", {id: "forgotPasswordForm", className: "ui login form"}, 
             React.createElement("div", {className: "field"}, 
                 React.createElement("label", null, mf("email")), 
                 React.createElement("div", {className: "ui icon input"}, 

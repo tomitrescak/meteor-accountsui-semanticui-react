@@ -32,7 +32,7 @@ export default class SignIn extends Component<IComponent, {}> {
     const mf = this.props.context.i18n.initTranslator("accounts");
 
     return (
-      <div className="ui form login black" id="signInForm">
+      <div className="ui form login" id="signInForm">
         <div className="field">
           <label>{ mf("email") }</label>
           <div className="ui icon input">

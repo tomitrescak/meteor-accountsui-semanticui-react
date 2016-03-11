@@ -26,7 +26,7 @@ var SignUp = (function (_super) {
     };
     SignUp.prototype.render = function () {
         var mf = this.props.context.i18n.initTranslator("accounts");
-        return (React.createElement("div", {className: "ui form login black", id: "signUpForm"}, 
+        return (React.createElement("div", {className: "ui form login", id: "signUpForm"}, 
             React.createElement("div", {className: "ui error message"}), 
             React.createElement("div", {className: "field"}, 
                 React.createElement("label", null, mf("fullName")), 

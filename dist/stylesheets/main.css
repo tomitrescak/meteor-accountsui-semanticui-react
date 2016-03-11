@@ -1,0 +1,15 @@
+.login {
+}
+
+.inverted .login .divider,
+.inverted .login label {
+  color: white!important;
+}
+
+.login .last.column {
+  padding-top: 2px!important;
+}
+
+.login .first.column {
+  padding-bottom: 2px!important;
+}

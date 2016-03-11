@@ -33,7 +33,7 @@ export default class ForgotPassword extends Component<IComponent, {}> {
     const mf = this.props.context.i18n.initTranslator("accounts");
 
     return (
-      <div id="forgotPasswordForm" className="ui black login form">
+      <div id="forgotPasswordForm" className="ui login form">
         <div className="field">
           <label>{ mf("email") }</label>
           <div className="ui icon input">

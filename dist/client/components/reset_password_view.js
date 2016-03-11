@@ -17,26 +17,26 @@ var ResetPassword = (function (_super) {
     };
     ResetPassword.prototype.render = function () {
         this.context = this.props.context;
-        var mf = this.props.context.__;
-        return (React.createElement("div", null, 
-            React.createElement("form", {className: "ui form", id: "resetPasswordForm"}, 
-                React.createElement("div", {className: "field"}, 
-                    React.createElement("label", null, mf("password")), 
-                    React.createElement("div", {className: "ui icon input"}, 
-                        React.createElement("input", {type: "password", placeholder: mf("password"), ref: "password"}), 
-                        React.createElement("i", {className: "lock icon"}), 
-                        React.createElement("div", {className: "ui corner label"}, 
-                            React.createElement("i", {className: "icon asterisk"})
-                        ))), 
-                React.createElement("div", {className: "field"}, 
-                    React.createElement("label", null, mf("passwordAgain")), 
-                    React.createElement("div", {className: "ui icon input"}, 
-                        React.createElement("input", {type: "password", placeholder: mf("passwordAgain"), ref: "password-again"}), 
-                        React.createElement("i", {className: "lock icon"}), 
-                        React.createElement("div", {className: "ui corner label"}, 
-                            React.createElement("i", {className: "icon asterisk"})
-                        ))), 
-                React.createElement("div", {className: "center aligned column"}, 
+        var mf = this.props.context.i18n.initTranslator("accounts");
+        return (React.createElement("div", {className: "ui form login", id: "resetPasswordForm"}, 
+            React.createElement("div", {className: "field"}, 
+                React.createElement("label", null, mf("password")), 
+                React.createElement("div", {className: "ui icon input"}, 
+                    React.createElement("input", {type: "password", placeholder: mf("password"), ref: "password"}), 
+                    React.createElement("i", {className: "lock icon"}), 
+                    React.createElement("div", {className: "ui corner label"}, 
+                        React.createElement("i", {className: "icon asterisk"})
+                    ))), 
+            React.createElement("div", {className: "field"}, 
+                React.createElement("label", null, mf("passwordAgain")), 
+                React.createElement("div", {className: "ui icon input"}, 
+                    React.createElement("input", {type: "password", placeholder: mf("passwordAgain"), ref: "password-again"}), 
+                    React.createElement("i", {className: "lock icon"}), 
+                    React.createElement("div", {className: "ui corner label"}, 
+                        React.createElement("i", {className: "icon asterisk"})
+                    ))), 
+            React.createElement("div", {className: "ui equal width center aligned grid"}, 
+                React.createElement("div", {className: "first column"}, 
                     React.createElement("div", {className: "ui red fluid submit button", onClick: this.resetPassword.bind(this)}, mf("resetYourPassword"))
                 ), 
                 React.createElement("div", {className: "ui horizontal divider"}, "Or"), 
@@ -44,11 +44,10 @@ var ResetPassword = (function (_super) {
                     React.createElement("div", {className: "green ui labeled icon button", onClick: this.props.showSignIn}, 
                         React.createElement("i", {className: "sign in icon"}), 
                         mf("signIn"))
-                ))
-        ));
+                ))));
     };
     ResetPassword.prototype.componentDidMount = function () {
-        var mf = this.context.__;
+        var mf = this.context.i18n.initTranslator("accounts");
         this.props.clearMessages();
         $(".ui.form")
             .form({
@@ -60,11 +59,11 @@ var ResetPassword = (function (_super) {
                     rules: [
                         {
                             type: "empty",
-                            prompt: mf("passwordRequired")
+                            prompt: mf("error.passwordRequired")
                         },
                         {
                             type: "length[7]",
-                            prompt: mf("minChar")
+                            prompt: mf("error.minChar")
                         }
                     ]
                 },

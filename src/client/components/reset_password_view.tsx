@@ -28,29 +28,29 @@ export default class ResetPassword extends Component<IComponent, {}> {
     const mf = this.props.context.i18n.initTranslator("accounts");
 
     return (
-      <div>
-        <form className="ui form" id="resetPasswordForm">
-          <div className="field">
-            <label>{ mf("password") }</label>
-            <div className="ui icon input">
-              <input type="password" placeholder={ mf("password") } ref="password" />
-              <i className="lock icon" />
-              <div className="ui corner label">
-                <i className="icon asterisk" />
-              </div>
+      <div className="ui form login" id="resetPasswordForm">
+        <div className="field">
+          <label>{ mf("password") }</label>
+          <div className="ui icon input">
+            <input type="password" placeholder={ mf("password") } ref="password" />
+            <i className="lock icon" />
+            <div className="ui corner label">
+              <i className="icon asterisk" />
             </div>
           </div>
-          <div className="field">
-            <label>{ mf("passwordAgain") }</label>
-            <div className="ui icon input">
-              <input type="password" placeholder={ mf("passwordAgain") } ref="password-again" />
-              <i className="lock icon" />
-              <div className="ui corner label">
-                <i className="icon asterisk" />
-              </div>
+        </div>
+        <div className="field">
+          <label>{ mf("passwordAgain") }</label>
+          <div className="ui icon input">
+            <input type="password" placeholder={ mf("passwordAgain") } ref="password-again" />
+            <i className="lock icon" />
+            <div className="ui corner label">
+              <i className="icon asterisk" />
             </div>
           </div>
-          <div className="center aligned column">
+        </div>
+        <div className="ui equal width center aligned grid">
+          <div className="first column">
             <div className="ui red fluid submit button" onClick={this.resetPassword.bind(this) }>{ mf("resetYourPassword") }</div>
           </div>
           <div className="ui horizontal divider">
@@ -62,7 +62,7 @@ export default class ResetPassword extends Component<IComponent, {}> {
               { mf("signIn") }
             </div>
           </div>
-        </form>
+        </div>
 
       </div>
     );

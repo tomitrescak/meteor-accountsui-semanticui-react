@@ -20,7 +20,7 @@ var SignIn = (function (_super) {
     };
     SignIn.prototype.render = function () {
         var mf = this.props.context.i18n.initTranslator("accounts");
-        return (React.createElement("div", {className: "ui form login black", id: "signInForm"}, 
+        return (React.createElement("div", {className: "ui form login", id: "signInForm"}, 
             React.createElement("div", {className: "field"}, 
                 React.createElement("label", null, mf("email")), 
                 React.createElement("div", {className: "ui icon input"}, 
