@@ -22,12 +22,14 @@ function default_1(_a) {
                 invalidCredentials: "We are sorry but these credentials are not valid.",
                 unknownError: "We are experiencing problems with our server, please try again later.",
                 tokenExpired: "This token is no longer valid",
+                requiredFields: "Required fields are missing"
             },
             forgotPassword: "Forgot password?",
             fullName: "Full Name",
             messages: {
                 clickOnEmail: "Dear Player\n\nPlease, click on the following link to verify your email address: ",
                 passwordResetEmailSent: "Email sent, please check your inbox.",
+                emailVerified: "Your email has been successfully verified. You will be automatically logged in ...",
                 passwordChanged: "Your password was changed successfully",
                 verificationEmailSent: "Verification email sent",
                 verificationSent: "Congrats! You\"re now a new Player! Before logging in, your email has to be " +
@@ -37,8 +39,10 @@ function default_1(_a) {
             password: "Password",
             passwordAgain: "Password Again",
             resendVerification: "Re-send verification",
+            resetYourPassword: "Reset your password",
             signIn: "Sign In",
-            signUp: "Register"
+            signUp: "Register",
+            signOut: "Sign Out"
         }
     });
 }

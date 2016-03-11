@@ -11,11 +11,18 @@ var SignIn = (function (_super) {
         _super.apply(this, arguments);
     }
     SignIn.prototype.signIn = function () {
-        $("#signInForm").dimmer("show");
+        if ($("#signIn").hasClass("loading")) {
+            return;
+        }
+        $("#signInForm").form("validate form");
+        if (!$("#signInForm").form("is valid")) {
+            return;
+        }
+        $("#signIn").addClass("loading");
         var email = this.refs["email"]["value"];
         var password = this.refs["password"]["value"];
         this.props.signIn(email, password, function () {
-            $("#signInForm").dimmer("hide");
+            $("#signIn").removeClass("loading");
         });
     };
     SignIn.prototype.render = function () {
@@ -38,7 +45,7 @@ var SignIn = (function (_super) {
                     )
                 ), 
                 React.createElement("div", {className: "centered aligned"}, 
-                    React.createElement("div", {className: "ui submit primary button", onClick: this.signIn.bind(this)}, mf("signIn"))
+                    React.createElement("div", {className: "ui submit primary button", onClick: this.signIn.bind(this), id: "signIn"}, mf("signIn"))
                 ), 
                 React.createElement("div", {className: "right aligned column", style: { paddingTop: 2 }}, 
                     React.createElement("div", null, 

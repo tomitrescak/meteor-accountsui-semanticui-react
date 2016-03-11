@@ -11,6 +11,9 @@ var ForgotPassword = (function (_super) {
         _super.apply(this, arguments);
     }
     ForgotPassword.prototype.emailResetLink = function () {
+        if ($("#emailButton").hasClass("loading")) {
+            return;
+        }
         $("#forgotPasswordForm").form("validate form");
         if (!$("#forgotPasswordForm").form("is valid")) {
             return;

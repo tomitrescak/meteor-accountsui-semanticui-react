@@ -20,7 +20,7 @@ function default_1(context) {
                 }
             }
             else {
-                Session.set(accounts_1.ERRORKEY, i18n_client_1.__("accounts.messages.emailVerified"));
+                Session.set(accounts_1.MESSAGEKEY, i18n_client_1.__("accounts.messages.emailVerified"));
                 done();
             }
         });

@@ -11,6 +11,13 @@ var ResendVerification = (function (_super) {
         _super.apply(this, arguments);
     }
     ResendVerification.prototype.emailVerification = function () {
+        if ($("#sendVerification").hasClass("loading")) {
+            return;
+        }
+        $("#resendVerificationForm").form("validate form");
+        if (!$("#resendVerificationForm").form("is valid")) {
+            return;
+        }
         $("#sendVerification").addClass("loading");
         var email = this.refs["email"]["value"];
         this.props.emailVerification(email, function () {
@@ -23,7 +30,7 @@ var ResendVerification = (function (_super) {
             React.createElement("div", {className: "field"}, 
                 React.createElement("label", null, mf("email")), 
                 React.createElement("div", {className: "ui icon input"}, 
-                    React.createElement("input", {type: "text", placeholder: mf("emailAddress"), ref: "email"}), 
+                    React.createElement("input", {type: "text", placeholder: mf("emailAddress"), ref: "email", id: "email"}), 
                     React.createElement("i", {className: "mail icon"}))), 
             React.createElement("div", {className: "ui equal width center aligned grid"}, 
                 React.createElement("div", {className: "first column"}, 
@@ -44,18 +51,17 @@ var ResendVerification = (function (_super) {
         $(".ui.form")
             .form({
             inline: true,
-            on: "blur",
             fields: {
-                username: {
+                email: {
                     identifier: "email",
                     rules: [
                         {
                             type: "empty",
-                            prompt: mf("error.emailEmpty")
+                            prompt: mf("error.emailRequired")
                         },
                         {
                             type: "email",
-                            prompt: mf("error.invalidEmail")
+                            prompt: mf("error.emailIncorrect")
                         }
                     ]
                 }

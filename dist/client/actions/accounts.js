@@ -46,11 +46,9 @@ function areValidPasswords(password, confirm) {
 ;
 var localState;
 function showError(message) {
-    debugger;
     localState.set(exports.ERRORKEY, message);
 }
 function showInfo(message) {
-    debugger;
     localState.set(exports.MESSAGEKEY, message);
 }
 function clearMessages() {
@@ -63,7 +61,8 @@ var Actions = {
         clearMessages();
     },
     signIn: function (_a, email, password, callback, e) {
-        var Meteor = _a.Meteor, __ = _a.__;
+        var Meteor = _a.Meteor, Session = _a.Session, __ = _a.__;
+        localState = Session;
         clearMessages();
         email = trimInput(email.toLowerCase());
         if (isNotEmpty(email) && isEmail(email) && isNotEmpty(password) && isValidPassword(password)) {
@@ -101,7 +100,7 @@ var Actions = {
         }
         return false;
     },
-    resetPassword: function (_a, password, passwordConfirm) {
+    resetPassword: function (_a, password, passwordConfirm, callback) {
         var __ = _a.__, Session = _a.Session;
         if (isNotEmpty(password) && areValidPasswords(password, passwordConfirm)) {
             var token = Session.get(exports.TOKENKEY);
@@ -119,7 +118,11 @@ var Actions = {
                     Session.set(exports.TOKENKEY, null);
                     Session.set(exports.VIEWKEY, "signIn");
                 }
+                callback();
             });
+        }
+        else {
+            showError("error.passwordNotChanged");
         }
     },
     register: function (_a, name, email, password, passwordConfirm, callback) {
@@ -182,8 +185,9 @@ var Actions = {
     },
     signOut: function (_a) {
         var Meteor = _a.Meteor;
+        console.log("dodod");
         Meteor.logout(function () {
-            // Session.set("alert", "Bye Meteorite! Come back whenever you want!");
+            console.log("Bye Meteorite! Come back whenever you want!");
         });
     },
     showSignIn: function (_a) {

@@ -1,7 +1,7 @@
 import { Accounts } from "meteor/accounts-base";
 import { Meteor } from "meteor/meteor";
 
-import { VIEWKEY , ERRORKEY, TOKENKEY } from "../actions/accounts";
+import { VIEWKEY , ERRORKEY, TOKENKEY, MESSAGEKEY } from "../actions/accounts";
 import { __ } from "i18n-client";
 import { IContext } from "./context";
 
@@ -25,7 +25,7 @@ export default function(context: IContext) {
           Session.set(ERRORKEY, __("accounts.error.loginTokenExpired"));
         }
       } else {
-        Session.set(ERRORKEY, __("accounts.messages.emailVerified"));
+        Session.set(MESSAGEKEY, __("accounts.messages.emailVerified"));
         done();
       }
     });

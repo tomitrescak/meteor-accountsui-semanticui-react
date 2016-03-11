@@ -17,6 +17,9 @@ interface IComponent extends IComponentProps, IComponentActions { }
 
 export default class ForgotPassword extends Component<IComponent, {}> {
   emailResetLink() {
+    if ($("#emailButton").hasClass("loading")) {
+      return;
+    }
     $("#forgotPasswordForm").form("validate form");
     if (!$("#forgotPasswordForm").form("is valid")) {
       return;

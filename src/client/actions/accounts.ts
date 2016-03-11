@@ -49,12 +49,10 @@ function areValidPasswords(password: string, confirm: string) {
 let localState: any;
 
 function showError(message: string) {
-  debugger;
   localState.set(ERRORKEY, message);
 }
 
 function showInfo(message: string) {
-  debugger;
   localState.set(MESSAGEKEY, message);
 }
 
@@ -69,7 +67,8 @@ const Actions = {
     clearMessages();
   },
 
-  signIn ({Meteor, __}: IContext, email: string, password: string, callback: Function, e: any) {
+  signIn ({Meteor, Session, __}: IContext, email: string, password: string, callback: Function, e: any) {
+    localState = Session;
     clearMessages();
 
     email = trimInput(email.toLowerCase());
@@ -113,7 +112,7 @@ const Actions = {
     return false;
   },
 
-  resetPassword ({__, Session}: IContext, password: string, passwordConfirm: string): void {
+  resetPassword ({__, Session}: IContext, password: string, passwordConfirm: string, callback: Function): void {
     if (isNotEmpty(password) && areValidPasswords(password, passwordConfirm)) {
       const token = Session.get(TOKENKEY);
 
@@ -129,7 +128,10 @@ const Actions = {
           Session.set(TOKENKEY, null);
           Session.set(VIEWKEY, "signIn");
         }
+        callback();
       });
+    } else {
+      showError("error.passwordNotChanged");
     }
   },
 
@@ -192,8 +194,9 @@ const Actions = {
   },
 
   signOut({Meteor}: IContext) {
+    console.log("dodod");
     Meteor.logout(function() {
-      // Session.set("alert", "Bye Meteorite! Come back whenever you want!");
+      console.log("Bye Meteorite! Come back whenever you want!");
     });
   },
 

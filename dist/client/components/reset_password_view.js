@@ -11,9 +11,19 @@ var ResetPassword = (function (_super) {
         _super.apply(this, arguments);
     }
     ResetPassword.prototype.resetPassword = function () {
+        if ($("#resetPassword").hasClass("loading")) {
+            return;
+        }
+        $("#resetPasswordForm").form("validate form");
+        if (!$("#resetPasswordForm").form("is valid")) {
+            return;
+        }
+        $("#resetPassword").addClass("loading");
         var pass1 = this.refs["password"]["value"];
         var pass2 = this.refs["password-again"]["value"];
-        this.props.resetPassword(pass1, pass2);
+        this.props.resetPassword(pass1, pass2, function () {
+            $("#resetPassword").removeClass("loading");
+        });
     };
     ResetPassword.prototype.render = function () {
         this.context = this.props.context;
@@ -22,22 +32,16 @@ var ResetPassword = (function (_super) {
             React.createElement("div", {className: "field"}, 
                 React.createElement("label", null, mf("password")), 
                 React.createElement("div", {className: "ui icon input"}, 
-                    React.createElement("input", {type: "password", placeholder: mf("password"), ref: "password"}), 
-                    React.createElement("i", {className: "lock icon"}), 
-                    React.createElement("div", {className: "ui corner label"}, 
-                        React.createElement("i", {className: "icon asterisk"})
-                    ))), 
+                    React.createElement("input", {type: "password", placeholder: mf("password"), ref: "password", id: "password"}), 
+                    React.createElement("i", {className: "lock icon"}))), 
             React.createElement("div", {className: "field"}, 
                 React.createElement("label", null, mf("passwordAgain")), 
                 React.createElement("div", {className: "ui icon input"}, 
-                    React.createElement("input", {type: "password", placeholder: mf("passwordAgain"), ref: "password-again"}), 
-                    React.createElement("i", {className: "lock icon"}), 
-                    React.createElement("div", {className: "ui corner label"}, 
-                        React.createElement("i", {className: "icon asterisk"})
-                    ))), 
+                    React.createElement("input", {type: "password", placeholder: mf("passwordAgain"), ref: "password-again", id: "password-again"}), 
+                    React.createElement("i", {className: "lock icon"}))), 
             React.createElement("div", {className: "ui equal width center aligned grid"}, 
                 React.createElement("div", {className: "first column"}, 
-                    React.createElement("div", {className: "ui red fluid submit button", onClick: this.resetPassword.bind(this)}, mf("resetYourPassword"))
+                    React.createElement("div", {className: "ui red submit button", id: "resetPassword", onClick: this.resetPassword.bind(this)}, mf("resetYourPassword"))
                 ), 
                 React.createElement("div", {className: "ui horizontal divider"}, "Or"), 
                 React.createElement("div", {className: "center aligned column"}, 
@@ -52,7 +56,6 @@ var ResetPassword = (function (_super) {
         $(".ui.form")
             .form({
             inline: true,
-            on: "blur",
             fields: {
                 password: {
                     identifier: "password",
@@ -63,7 +66,7 @@ var ResetPassword = (function (_super) {
                         },
                         {
                             type: "length[7]",
-                            prompt: mf("error.minChar")
+                            prompt: mf("error.minChar7")
                         }
                     ]
                 },

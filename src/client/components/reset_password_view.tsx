@@ -8,7 +8,7 @@ interface IComponentProps {
 
 interface IComponentActions {
   clearMessages: () => void;
-  resetPassword: (pass1: string, pass2: string) => void;
+  resetPassword: (pass1: string, pass2: string, callback: Function) => void;
   showSignIn: () => void;
 }
 
@@ -18,9 +18,22 @@ export default class ResetPassword extends Component<IComponent, {}> {
   context: IContext;
 
   resetPassword() {
+    if ($("#resetPassword").hasClass("loading")) {
+      return;
+    }
+
+    $("#resetPasswordForm").form("validate form");
+    if (!$("#resetPasswordForm").form("is valid")) {
+      return;
+    }
+
+    $("#resetPassword").addClass("loading");
     const pass1 = this.refs["password"]["value"];
     const pass2 = this.refs["password-again"]["value"];
-    this.props.resetPassword(pass1, pass2);
+
+    this.props.resetPassword(pass1, pass2, () => {
+      $("#resetPassword").removeClass("loading");
+    });
   }
 
   render() {
@@ -32,26 +45,20 @@ export default class ResetPassword extends Component<IComponent, {}> {
         <div className="field">
           <label>{ mf("password") }</label>
           <div className="ui icon input">
-            <input type="password" placeholder={ mf("password") } ref="password" />
+            <input type="password" placeholder={ mf("password") } ref="password" id="password" />
             <i className="lock icon" />
-            <div className="ui corner label">
-              <i className="icon asterisk" />
-            </div>
           </div>
         </div>
         <div className="field">
           <label>{ mf("passwordAgain") }</label>
           <div className="ui icon input">
-            <input type="password" placeholder={ mf("passwordAgain") } ref="password-again" />
+            <input type="password" placeholder={ mf("passwordAgain") } ref="password-again" id="password-again" />
             <i className="lock icon" />
-            <div className="ui corner label">
-              <i className="icon asterisk" />
-            </div>
           </div>
         </div>
         <div className="ui equal width center aligned grid">
           <div className="first column">
-            <div className="ui red fluid submit button" onClick={this.resetPassword.bind(this) }>{ mf("resetYourPassword") }</div>
+            <div className="ui red submit button" id="resetPassword" onClick={this.resetPassword.bind(this) }>{ mf("resetYourPassword") }</div>
           </div>
           <div className="ui horizontal divider">
             Or
@@ -75,7 +82,6 @@ export default class ResetPassword extends Component<IComponent, {}> {
     $(".ui.form")
       .form({
         inline: true,
-        on: "blur",
         fields: {
           password: {
             identifier: "password",
@@ -86,7 +92,7 @@ export default class ResetPassword extends Component<IComponent, {}> {
               },
               {
                 type: "length[7]",
-                prompt: mf("error.minChar")
+                prompt: mf("error.minChar7")
               }
             ]
           },

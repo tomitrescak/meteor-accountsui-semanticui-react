@@ -18,13 +18,22 @@ interface IComponent extends IComponentProps, IComponentActions { }
 
 export default class SignIn extends Component<IComponent, {}> {
   signIn() {
-    $("#signInForm").dimmer("show");
+    if ($("#signIn").hasClass("loading")) {
+      return;
+    }
+
+    $("#signInForm").form("validate form");
+    if (!$("#signInForm").form("is valid")) {
+      return;
+    }
+
+    $("#signIn").addClass("loading");
 
     const email = this.refs["email"]["value"];
     const password = this.refs["password"]["value"];
 
     this.props.signIn(email, password, () => {
-      $("#signInForm").dimmer("hide");
+      $("#signIn").removeClass("loading");
     });
   }
 
@@ -52,7 +61,7 @@ export default class SignIn extends Component<IComponent, {}> {
             <div><a href="#" id="forgotPasswordButton" onClick={ this.props.showForgotPassword}>{ mf("forgotPassword") }</a></div>
           </div>
           <div className="centered aligned">
-            <div className="ui submit primary button" onClick={this.signIn.bind(this) }>{ mf("signIn") }</div>
+            <div className="ui submit primary button" onClick={this.signIn.bind(this) } id="signIn">{ mf("signIn") }</div>
           </div>
           <div className="right aligned column" style={{ paddingTop: 2 }}>
             <div><a href="#" onClick={ this.props.showResendVerification}>{ mf("resendVerification") }</a></div>

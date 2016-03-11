@@ -11,6 +11,9 @@ var SignUp = (function (_super) {
         _super.apply(this, arguments);
     }
     SignUp.prototype.register = function () {
+        if ($("#registerButton").hasClass("loading")) {
+            return;
+        }
         $("#signUpForm").form("validate form");
         if (!$("#signUpForm").form("is valid")) {
             return;

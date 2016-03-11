@@ -11,16 +11,19 @@ var UserView = (function (_super) {
         _super.apply(this, arguments);
     }
     UserView.prototype.render = function () {
-        var mf = this.props.context.__;
+        var mf = this.props.context.i18n.initTranslator("accounts");
         return (React.createElement("div", {className: "ui dropdown item", id: "userMenu"}, 
             React.createElement("i", {className: "user icon"}), 
-            this.props.showUserName ? this.props.context.Meteor.user().profile.name : "", 
+            this.props.userName, 
             React.createElement("i", {className: "caret down icon"}), 
             React.createElement("div", {className: "menu"}, 
                 React.createElement("a", {className: "item", id: "signOut", onClick: this.props.signOut}, 
                     React.createElement("i", {className: "sign out icon"}), 
                     mf("signOut"))
             )));
+    };
+    UserView.prototype.componentDidMount = function () {
+        $("#userMenu").dropdown({ on: "hover" });
     };
     return UserView;
 }(react_1.Component));

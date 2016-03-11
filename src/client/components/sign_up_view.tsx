@@ -15,6 +15,9 @@ interface IComponent extends IComponentProps, IComponentActions { }
 
 export default class SignUp extends Component<IComponent, {}> {
   register() {
+    if ($("#registerButton").hasClass("loading")) {
+      return;
+    }
     $("#signUpForm").form("validate form");
     if (!$("#signUpForm").form("is valid")) {
       return;

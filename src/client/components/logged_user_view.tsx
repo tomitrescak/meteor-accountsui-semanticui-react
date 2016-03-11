@@ -2,12 +2,12 @@
 import { Component } from "react";
 import { IContext } from "../configs/context";
 
-interface IComponentProps {
+export interface IComponentProps {
   context: IContext;
-  showUserName: boolean;
+  userName: string;
 }
 
-interface IComponentActions {
+export interface IComponentActions {
   signOut: () => void;
 }
 
@@ -20,13 +20,16 @@ export default class UserView extends Component<IComponent, {}> {
     return (
       <div className="ui dropdown item" id="userMenu">
           <i className="user icon" />
-          { this.props.showUserName ? this.props.context.Meteor.user().profile.name : "" }
+          { this.props.userName }
           <i className="caret down icon" />
           <div className="menu">
               <a className="item" id="signOut" onClick={this.props.signOut}><i className="sign out icon" />{ mf("signOut") }</a>
           </div>
       </div>
-
     );
+  }
+
+  componentDidMount() {
+    $("#userMenu").dropdown({ on: "hover"});
   }
 }

@@ -15,6 +15,14 @@ interface IComponent extends IComponentProps, IComponentActions { }
 
 export default class ResendVerification extends Component<IComponent, {}> {
   emailVerification() {
+    if ($("#sendVerification").hasClass("loading")) {
+      return;
+    }
+    $("#resendVerificationForm").form("validate form");
+    if (!$("#resendVerificationForm").form("is valid")) {
+      return;
+    }
+
     $("#sendVerification").addClass("loading");
     const email = this.refs["email"]["value"];
     this.props.emailVerification(email, () => {
@@ -30,7 +38,7 @@ export default class ResendVerification extends Component<IComponent, {}> {
         <div className="field">
           <label>{ mf("email") }</label>
           <div className="ui icon input">
-            <input type="text" placeholder={ mf("emailAddress") } ref="email" />
+            <input type="text" placeholder={ mf("emailAddress") } ref="email" id="email" />
             <i className="mail icon" />
           </div>
         </div>
@@ -62,18 +70,17 @@ export default class ResendVerification extends Component<IComponent, {}> {
     $(".ui.form")
       .form({
         inline: true,
-        on: "blur",
         fields: {
-          username: {
+          email: {
             identifier: "email",
             rules: [
               {
                 type: "empty",
-                prompt: mf("error.emailEmpty")
+                prompt: mf("error.emailRequired")
               },
               {
                 type: "email",
-                prompt: mf("error.invalidEmail")
+                prompt: mf("error.emailIncorrect")
               }
             ]
           }
